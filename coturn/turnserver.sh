@@ -12,7 +12,11 @@ if [ $NAT = "true" -a -z "$EXTERNAL_IP" ]; then
   # Try to get private IP
   PRIVATE_IP=$(ifconfig | awk '/inet addr/{print substr($2,6)}' | grep -v 127.0.0.1) || exit 1
   export EXTERNAL_IP="$PUBLIC_IP/$PRIVATE_IP"
+  echo "---------"
   echo "Starting turn server with external IP: $EXTERNAL_IP"
+  echo "---------"
+  echo "$EXTERNAL_IP"
+  echo "---------"
 fi
 
 echo 'min-port=49152' > /etc/turnserver.conf
